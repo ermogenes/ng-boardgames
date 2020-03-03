@@ -1,11 +1,8 @@
 <h2>My Boardgames</h2>
 <ul class="boardgames">
-    <li *ngFor="let bg of boardgames"
-        (click)="onSelect(bg)"
-        [class.selected]="bg == selectedBoardgame">
-        <span class="badge">{{bg.id}}</span>
-        <span>{{bg.name}}</span>
+    <li *ngFor="let bg of boardgames">
+        <a routerLink="/bg/{{bg.id}}" [class.selected]="bg == selectedBoardgame">
+            <span class="badge">{{bg.id}}</span> {{bg.name}}
+        </a>
     </li>
 </ul>
-
-<app-boardgame-detail [boardgame]="selectedBoardgame"></app-boardgame-detail>

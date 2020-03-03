@@ -1,0 +1,6 @@
+<h3>Top Boardgames</h3>
+<div class="grid grid-pad">
+    <a *ngFor="let bg of boardgames" class="col-1-4" routerLink="/bg/{{bg.id}}">
+        <div class="module hero">{{bg.name}}</div>
+    </a>
+</div>

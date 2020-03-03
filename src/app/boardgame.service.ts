@@ -14,7 +14,12 @@ export class BoardgameService {
   constructor(private messageService: MessageService) { }
 
   getBoardgames(): Observable<Boardgame[]> {
-    this.messageService.add("BoardgameService: fetched boardgames.");
+    this.messageService.add("BoardgameService: fetched all boardgames.");
     return of(BOARDGAMES);
+  }
+
+  getBoardGame(id: number): Observable<Boardgame> {
+    this.messageService.add(`BoardgameService: fetched boardgame #${id}.`);
+    return of(BOARDGAMES.find(bg => bg.id == id));
   }
 }

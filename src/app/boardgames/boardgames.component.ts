@@ -21,11 +21,6 @@ export class BoardgamesComponent implements OnInit {
     this.getBoardgames();
   }
 
-  onSelect(bg: Boardgame) {
-    this.selectedBoardgame = bg;
-    this.messageService.add(`BoardgamesComponent: fetched ${bg.name}`);
-  }
-
   getBoardgames(): void {
     this.boardgameService.getBoardgames()
       .subscribe(bgs => this.boardgames = bgs);

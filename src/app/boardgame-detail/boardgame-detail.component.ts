@@ -1,5 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+
 import { Boardgame } from '../boardgame';
+import { BoardgameService } from '../boardgame.service';
 
 @Component({
   selector: 'app-boardgame-detail',
@@ -10,9 +14,24 @@ export class BoardgameDetailComponent implements OnInit {
 
   @Input() boardgame: Boardgame;
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private location: Location,
+    private boardgameService: BoardgameService,
+  ) { }
 
   ngOnInit(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.getBoardgame(id);
+  }
+
+  getBoardgame(id: number): void {
+    this.boardgameService.getBoardGame(id)
+      .subscribe(bg => this.boardgame = bg)
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
 }
