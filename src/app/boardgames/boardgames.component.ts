@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Boardgame } from '../boardgame';
-import { BOARDGAMES } from '../boardgames-mock';
+import { BoardgameService } from '../boardgame.service';
 
 @Component({
   selector: 'app-boardgames',
@@ -9,22 +9,21 @@ import { BOARDGAMES } from '../boardgames-mock';
 })
 export class BoardgamesComponent implements OnInit {
 
-  Boardgame: Boardgame = {
-    id: 1,
-    name: "Agricola estático",
-    publisher: "Devir",
-    year: 2010,
-  };
-
   selectedBoardgame: Boardgame;
-  boardgames = BOARDGAMES;
+  boardgames: Boardgame[];
 
-  constructor() { }
+  constructor(private boardgameService: BoardgameService) {}
 
   ngOnInit(): void {
+    this.getBoardgames();
   }
 
   onSelect(bg: Boardgame) {
-      this.selectedBoardgame = bg;
+    this.selectedBoardgame = bg;
+  }
+
+  getBoardgames(): void {
+    this.boardgameService.getBoardgames()
+      .subscribe(bgs => this.boardgames = bgs);
   }
 }
