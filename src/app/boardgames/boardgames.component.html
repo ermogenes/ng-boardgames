@@ -8,13 +8,4 @@
     </li>
 </ul>
 
-<div *ngIf="selectedBoardgame">
-    <h2>{{selectedBoardgame.name | uppercase}} details</h2>
-    <div>
-        <span>Id:</span> {{selectedBoardgame.id}}
-    </div>
-    <div>
-        <label>Name:</label>
-        <input placeholder="boardgame name" [(ngModel)]="selectedBoardgame.name" />
-    </div>
-</div>
+<app-boardgame-detail [boardgame]="selectedBoardgame"></app-boardgame-detail>

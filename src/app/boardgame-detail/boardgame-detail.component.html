@@ -1,0 +1,10 @@
+<div *ngIf="boardgame">
+    <h2>{{boardgame.name | uppercase}} details</h2>
+    <div>
+        <span>Id:</span> {{boardgame.id}}
+    </div>
+    <div>
+        <label>Name:</label>
+        <input placeholder="type here the boardgame name" [(ngModel)]="boardgame.name" />
+    </div>
+</div>
