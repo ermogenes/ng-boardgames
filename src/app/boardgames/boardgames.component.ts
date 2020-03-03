@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Boardgame } from '../boardgame';
 import { BoardgameService } from '../boardgame.service';
+
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-boardgames',
@@ -12,7 +15,7 @@ export class BoardgamesComponent implements OnInit {
   selectedBoardgame: Boardgame;
   boardgames: Boardgame[];
 
-  constructor(private boardgameService: BoardgameService) {}
+  constructor(private boardgameService: BoardgameService, private messageService: MessageService) {}
 
   ngOnInit(): void {
     this.getBoardgames();
@@ -20,6 +23,7 @@ export class BoardgamesComponent implements OnInit {
 
   onSelect(bg: Boardgame) {
     this.selectedBoardgame = bg;
+    this.messageService.add(`BoardgamesComponent: fetched ${bg.name}`);
   }
 
   getBoardgames(): void {
