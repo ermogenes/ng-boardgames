@@ -1,0 +1,20 @@
+<h2>My Boardgames</h2>
+<ul class="boardgames">
+    <li *ngFor="let bg of boardgames"
+        (click)="onSelect(bg)"
+        [class.selected]="bg == selectedBoardgame">
+        <span class="badge">{{bg.id}}</span>
+        <span>{{bg.name}}</span>
+    </li>
+</ul>
+
+<div *ngIf="selectedBoardgame">
+    <h2>{{selectedBoardgame.name | uppercase}} details</h2>
+    <div>
+        <span>Id:</span> {{selectedBoardgame.id}}
+    </div>
+    <div>
+        <label>Name:</label>
+        <input placeholder="boardgame name" [(ngModel)]="selectedBoardgame.name" />
+    </div>
+</div>
