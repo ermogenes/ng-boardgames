@@ -1,7 +1,11 @@
+// Continue from https://angular.io/tutorial/toh-pt6#httpclient-methods-return-one-value
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './in-memory-data.service';
 import { AppComponent } from './app.component';
 import { BoardgamesComponent } from './boardgames/boardgames.component';
 import { BoardgameDetailComponent } from './boardgame-detail/boardgame-detail.component';
@@ -15,12 +19,20 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     BoardgamesComponent,
     BoardgameDetailComponent,
     MessagesComponent,
-    DashboardComponent
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    HttpClientModule,
+    // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
+    // and returns simulated server responses.
+    // Remove it when a real server is ready to receive requests.
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, { dataEncapsulation: false }
+    )
   ],
   providers: [],
   bootstrap: [AppComponent]

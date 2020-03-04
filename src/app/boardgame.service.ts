@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { Boardgame } from './boardgame';
-import { BOARDGAMES } from './boardgames-mock';
+
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { MessageService } from './message.service';
 
@@ -11,15 +12,24 @@ import { MessageService } from './message.service';
 })
 export class BoardgameService {
 
-  constructor(private messageService: MessageService) { }
+  private bgApiUrl = '/api/bgs';
+
+  constructor(
+    private http: HttpClient,
+    private messageService: MessageService
+  ) { }
 
   getBoardgames(): Observable<Boardgame[]> {
-    this.messageService.add("BoardgameService: fetched all boardgames.");
-    return of(BOARDGAMES);
+    this.log("BoardgameService: fetched all boardgames.");
+    return this.http.get<Boardgame[]>(this.bgApiUrl);
   }
 
   getBoardGame(id: number): Observable<Boardgame> {
-    this.messageService.add(`BoardgameService: fetched boardgame #${id}.`);
-    return of(BOARDGAMES.find(bg => bg.id == id));
+    this.log(`BoardgameService: fetched boardgame #${id}.`);
+    return of(this.http.get<Boardgame[]>(this.bgApiUrl)[0]);
+  }
+
+  private log(message: string) {
+    this.messageService.add(`HeroService: ${message}`);
   }
 }
